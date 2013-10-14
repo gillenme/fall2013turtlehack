@@ -1,95 +1,116 @@
 import turtle
 import random
 
-# A function that takes a turtle, a radius, a color, and an optional thickness and draws a circle
-def colored_circle(turtle, radius, color, thickness = 1):
-	turtle.width(thickness)
-	turtle.color(color)
-	turtle.circle(radius)
+# A function that takes a turtle, a radius, a color, and an optional
+# thickness and draws a circle
 
 
-# A function that takes a side length and a color and makes a square. 
+def colored_circle(turtle, radius, color, thickness=1):
+    turtle.width(thickness)
+    turtle.color(color)
+    turtle.circle(radius)
+
+
+# A function that takes a side length and a color and makes a square.
 def colored_square(turtle, side_length, color):
-  turtle.color(color)
-  for i in range(4):
-    turtle.forward(side_length)
+    turtle.color(color)
+    for i in range(4):
+        turtle.forward(side_length)
+        turtle.left(90)
     turtle.left(90)
-  turtle.left(90)
-  
-# A function that take a turtle, dot size, color, and number of dots in line to make a dotted line
+
+# A function that take a turtle, dot size, color, and number of dots in
+# line to make a dotted line
+
+
 def dotted_line(turtle, number_of_dots, dot_size, color):
-	for i in range(number_of_dots):
-	  turtle.dot(dot_size, color)
-	  turtle.penup()
-	  turtle.forward(dot_size * 2)
-	  turtle.pendown()
-  
+    for i in range(number_of_dots):
+        turtle.dot(dot_size, color)
+        turtle.penup()
+        turtle.forward(dot_size * 2)
+        turtle.pendown()
+
 # A function that takes a number and makes that many random sized circles
-def random_circle(turtle, number_of_circles, max_size = 100):
-	for i in range(number_of_circles):
-	  turtle.circle(random.randint(0,max_size + 1))
+
+
+def random_circle(turtle, number_of_circles, max_size=100):
+    for i in range(number_of_circles):
+        turtle.circle(random.randint(0, max_size + 1))
 
 # A function that changes the turtle's color to a random color
-def random_color():
-	'''
-	returns a random hex value
-	'''
-	color_value = format(random.randint(0,16777215),'06x')
-	return "#" +color_value
 
-# A function that takes a turtle and a pair of numbers and sets the turtle to a random location from x to -x and y to -y
+
+def random_color():
+    '''
+    returns a random hex value
+    '''
+    color_value = format(random.randint(0, 16777215), '06x')
+    return "#" + color_value
+
+# A function that takes a turtle and a pair of numbers and sets the turtle
+# to a random location from x to -x and y to -y
+
+
 def random_location(turtle, x, y, relative=False):
-	'''
-	Moves a turtle to a random location within x,y bounds
-	takes turtle, x bound, y bound, uselrelative location (boolean)
-	'''
-	if relative ==False:
-		random_x = random.randint(-x, x)
-		random_y = random.randint(-y, y)
-		turtle.setpos(random_x, random_y)
-	if relative ==True:
-		random_x = turtle.xcor() + random.randint(-x, x)
-		random_y = turtle.ycor() + random.randint(-y, y)
-		turtle.setpos(random_x, random_y)
-	else:
-		raise Exception("expected boolean")
+    '''
+    Moves a turtle to a random location within x,y bounds
+    takes turtle, x bound, y bound, uselrelative location (boolean)
+    '''
+    if relative is False:
+        random_x = random.randint(-x, x)
+        random_y = random.randint(-y, y)
+        turtle.setpos(random_x, random_y)
+    if relative is True:
+        random_x = turtle.xcor() + random.randint(-x, x)
+        random_y = turtle.ycor() + random.randint(-y, y)
+        turtle.setpos(random_x, random_y)
+    else:
+        raise Exception("expected boolean")
 # A function that makes n random colored and located dots inside x, y
 # Thanks to Stacey Mantooth for the idea
-def pox(turtle, x, y, n = 10):
-  origx = turtle.xcor()
-  origy = turtle.ycor()
-  turtle.penup()
-  for i in range(n):
-    random_location(turtle, x, y, True)
-    turtle.dot(random.randint(3, 10), random_color())
-    turtle.setpos(origx, origy)
-  turtle.pendown()
+
+
+def pox(turtle, x, y, n=10):
+    origx = turtle.xcor()
+    origy = turtle.ycor()
+    turtle.penup()
+    for i in range(n):
+        random_location(turtle, x, y, True)
+        turtle.dot(random.randint(3, 10), random_color())
+        turtle.setpos(origx, origy)
+    turtle.pendown()
 
 # A function that draws an n-sided polygon
-def n_sided_polygon(turtle, n, color="#FFFFFF", line_thickness=1, line_length=80):
-	'''
-	Draw an n-sided polygon
-	input: turtle, number of sides, line color, line thickness, line length
-	'''
-	# for n times:
-	# Draw a line, then turn 360/n degrees and draw another
 
-	# set initial parameters
-  	turtle.degrees()
-  	turtle.pensize(line_thickness)
-  	turn_angle = (360/n)
 
-	# Draw each line segment and turn
+def n_sided_polygon(
+    turtle,
+    n,
+    color="#FFFFFF",
+    line_thickness=1,
+        line_length=80):
+    '''
+    Draw an n-sided polygon
+    input: turtle, number of sides, line color, line thickness, line length
+    '''
+    # for n times:
+    # Draw a line, then turn 360/n degrees and draw another
 
-  	for i in range(0,n):
-	  turtle.color(color)
-    	  turtle.pendown()
-    	  turtle.forward(line_length)
-   	  turtle.penup()
-    	  turtle.left(turn_angle)
+    # set initial parameters
+    turtle.degrees()
+    turtle.pensize(line_thickness)
+    turn_angle = (360 / n)
 
-	# return the turtle to its original starting location
-	turtle.left(turn_angle)
+    # Draw each line segment and turn
 
-	return 0
+    for i in range(0, n):
+        turtle.color(color)
+        turtle.pendown()
+        turtle.forward(line_length)
+        turtle.penup()
+        turtle.left(turn_angle)
 
+    # return the turtle to its original starting location
+    turtle.left(turn_angle)
+
+    return 0
