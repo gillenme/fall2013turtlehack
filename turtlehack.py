@@ -39,15 +39,20 @@ def random_color():
 
 # A function that takes a turtle and a pair of numbers and sets the turtle to a random location from x to -x and y to -y
 def random_location(turtle, x, y, relative=False):
-  if not relative:
-  	random_x = random.randint(-x, x)
-  	random_y = random.randint(-y, y)
-  	turtle.setpos(random_x, random_y)
-  else:
-  	random_x = turtle.xcor() + random.randint(-x, x)
-  	random_y = turtle.ycor() + random.randint(-y, y)
-  	turtle.setpos(random_x, random_y)
-
+	'''
+	Moves a turtle to a random location within x,y bounds
+	takes turtle, x bound, y bound, uselrelative location (boolean)
+	'''
+	if relative ==False:
+		random_x = random.randint(-x, x)
+		random_y = random.randint(-y, y)
+		turtle.setpos(random_x, random_y)
+	if relative ==True:
+		random_x = turtle.xcor() + random.randint(-x, x)
+		random_y = turtle.ycor() + random.randint(-y, y)
+		turtle.setpos(random_x, random_y)
+	else:
+		raise Exception("expected boolean")
 # A function that makes n random colored and located dots inside x, y
 # Thanks to Stacey Mantooth for the idea
 def pox(turtle, x, y, n = 10):
